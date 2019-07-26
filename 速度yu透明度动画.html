@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>下拉菜单</title>
+  <style type="text/css">
+*{margin:0px;padding:0px;}
+
+    .fenxiang{position:relative;left:-200px;width:200px;height:200px;margin-top:50px;background-color: pink;}
+    .fx{background-color:lightblue;width:20px;height:50px;position: absolute;left:200px;top:75px;}
+    #div2{width:150px;height: 150px;background-color:#f00;margin-top:50px;
+    fliter:alpha(opacity:30);
+    opacity:0.3;}
+  </style>
+</head>
+<body>
+<div id="div1" class="fenxiang"><span id="share" class="fx">分享</span></div>
+<div id="div2"></div>
+<div id="div3" class="fenxiang"><span id="share" class="fx">分享</span></div>
+   <script type="text/javascript">
+window.onload =function(){
+var div1=document.getElementById('div1'),
+    div2=document.getElementById('div2'),
+    div3=document.getElementById('div3'),
+    timer=null,timer2=null,timer3=null,
+    alpha=30;
+    //匀速运动
+    div1.onmouseover=function(){
+     omMove(0);
+     }
+    div1.onmouseout=function(){
+      omMove(-200);
+    }
+
+
+    function omMove(mb) {
+     clearInterval(timer2);
+      timer2=setInterval(function(){
+        var sd = 0;
+        if (div1.offsetLeft>mb) {
+          sd = -10;
+        } else{
+          sd = 10;
+        };
+        if(div1.offsetLeft==mb){
+          clearInterval(timer2);
+        }else{
+          div1.style.left=div1.offsetLeft+sd+'px';
+        }
+      },20);
+    }
+
+
+    //透明度变化
+    div2.onmouseover=function(){
+     opMove(100);
+     }
+    div2.onmouseout=function(){
+      opMove(30);
+    }
+
+    function opMove(tmd){
+      clearInterval(timer);
+      timer=setInterval(function(){
+        var sd =0;
+        if (alpha>tmd) {
+          sd=-10;
+        } else{
+          sd=10;
+        };
+          if (alpha==tmd) {
+          clearInterval(timer);
+        } else{
+          alpha+=sd;
+          div2.style.fliter="alpha(opacity:"+alpha+")";
+          div2.style.opacity=alpha/100;//需要得到0.3
+        };
+      },30)
+    }
+
+    //缓冲运动
+    div3.onmouseover=function(){
+      hcMove(0);
+     }
+    div3.onmouseout=function(){
+      hcMove(-200);
+    }
+
+
+    function hcMove(mb2) {
+     clearInterval(timer3);
+      timer3=setInterval(function(){
+        //速度越接近目标越慢，除30调整
+        var sd = (mb2-div3.offsetLeft)/30;
+        //速度大于0则进行向上取整，小于0则向下取整
+        sd= sd>0?Math.ceil(sd):Math.floor(sd);
+        if(div3.offsetLeft==mb2){
+          clearInterval(timer3);
+        }else{
+          div3.style.left=div3.offsetLeft+sd+'px';
+        }
+      },20);
+    }
+
+    }
+   </script>
+</body>
+</html>

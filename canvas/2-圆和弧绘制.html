@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="canvas1" width="1000" height="1000">当前浏览器不支持</canvas>
+<script>
+	function canvas1() {
+		var canvas1 = document.getElementById('canvas1');
+
+		var context = canvas1.getContext('2d');
+
+		
+		context.lineWidth=5
+		context.strokeStyle="#058"
+		//context.arc(300,300,200,0,1.5*Math.PI)
+		//以300，300为圆心，半径为200，以0pi到1.5pi
+		//context.stroke()
+
+		for (var i = 0; i < 10; i++) {
+			context.beginPath()
+			context.arc(50+i*100,60,40,0,2*Math.PI*(i+1)/10)
+			context.closePath()
+			context.stroke()
+		}
+
+		for (var i = 0; i < 10; i++) {
+			context.beginPath()
+			context.arc(50+i*100,180,40,0,2*Math.PI*(i+1)/10)
+			context.stroke()
+		}
+		//逆时针
+		for (var i = 0; i < 10; i++) {
+			context.beginPath()
+			context.arc(50+i*100,300,40,0,2*Math.PI*(i+1)/10,true)
+			context.closePath()
+			context.stroke()
+		}
+
+		for (var i = 0; i < 10; i++) {
+			context.beginPath()
+			context.arc(50+i*100,420,40,0,2*Math.PI*(i+1)/10,true)
+			context.stroke()
+		}
+		//填充路径
+		context.fillStyle="#07f"
+		for (var i = 0; i < 10; i++) {
+			context.beginPath()
+			context.arc(50+i*100,540,40,0,2*Math.PI*(i+1)/10)
+			context.fill()
+			//fill会自动封闭路径，不用colsePath
+		}
+
+
+	}
+	canvas1();
+</script>
+
+
+</body>
+</html>

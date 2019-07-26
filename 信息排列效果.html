@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>信息排列效果</title>
+<style>
+        * { margin: 0;padding: 0;}
+        li{ list-style: none;}
+        a{text-decoration: none;}
+
+       #box{width:700px;border: solid 1px #aaa;margin: 0 auto;overflow:hidden ;}
+       .top{height: 40px;}
+       .top a{display:block;float: right;width:26px;height:26px;margin:5px;text-align: center;line-height:26px;color: #fff;font-size: 50px;background: #aaa;}
+
+       .top a.on{background: #5af;}
+
+       #box li{width:160px;height: 230px;border: solid 1px #aaa;float: left;margin:6px;}
+       #box li span{display: inline-block;width: 160px;height: 160px;background: #eee;}
+       #box li.small{height: 100px;}
+       #box li.small span{float: left;width: 50px;height: 50px;margin-right: 5px;}
+</style>
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.js"></script>
+<script>
+</script>
+</head>
+<body>
+<div id="box">
+    <div class="top">
+        <a href="#" title="列表模式" class="" id="btn2">=</a>
+        <a href="#" title="卡片模式" class="on"  id="btn1">+</a>
+    </div>
+    <ul>
+        <li><a href="#"><span></span></a><p>asdfghjk</p></li>
+        <li><a href="#"><span></span></a><p>asdfghjk</p></li>
+        <li><a href="#"><span></span></a><p>asdfghjk</p></li>
+        <li><a href="#"><span></span></a><p>asdfghjk</p></li>
+        <li><a href="#"><span></span></a><p>asdfghjk</p></li>
+        <li><a href="#"><span></span></a><p>asdfghjk</p></li>
+        <li><a href="#"><span></span></a><p>asdfghjk</p></li>
+        <li><a href="#"><span></span></a><p>asdfghjk</p></li>
+        <li><a href="#"><span></span></a><p>asdfghjk</p></li>
+        <li><a href="#"><span></span></a><p>asdfghjk</p></li>
+        <li><a href="#"><span></span></a><p>asdfghjk</p></li>
+    </ul>
+</div>
+<script>
+  var btn1= $("#btn1");
+  var btn2= $("#btn2");
+  var img = $("#box").find("li");
+    btn1.click(function(){
+        btn1.addClass("on");
+        btn2.removeClass("on");
+        img.removeClass("small");
+    })
+    btn2.click(function(){
+        btn2.addClass("on");
+        btn1.removeClass("on");
+        img.addClass("small");
+    })
+</script>
+</body>
+</html>

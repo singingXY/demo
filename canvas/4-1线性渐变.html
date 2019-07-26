@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="canvas">当前浏览器不支持</canvas>
+<script>
+	function canvas() {
+		var canvas = document.getElementById('canvas');
+		canvas.width =800;
+		canvas.height = 800;
+
+		var context = canvas.getContext('2d');
+
+		var linearGrad =context.createLinearGradient(0,0,800,800);
+		linearGrad.addColorStop(0.0,'#fff');
+		linearGrad.addColorStop(0.5,'#ff0');
+		linearGrad.addColorStop(1.0,'#000');
+		context.fillStyle =linearGrad;
+		context.fillRect(0,0,800,800);
+	}
+	canvas();
+
+</script>
+
+
+
+</body>
+</html>

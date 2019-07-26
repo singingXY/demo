@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="canvas" width="1000" height="768" style="border:1px #ccc solid">当前浏览器不支持</canvas>
+<script>
+var ball = {x:512,y:100,r:20,g:2,vx:-4,vy:0,color:"#058"}
+//g重力加速度，x轴速度vx，y轴速度vy
+window.onload= function canvas() {
+		var canvas = document.getElementById('canvas');
+		var context = canvas.getContext('2d');
+
+		setInterval(
+			function(){
+				render(context);
+				update();
+			},50
+			)
+
+	}
+function update(){
+	ball.vy +=ball.g;
+	ball.x+=ball.vx;
+	ball.y+=ball.vy;
+	if (ball.y>=768-ball.r) {
+		ball.y =768-ball.r;
+		ball.vy =-ball.vy*0.9
+	}
+	if (ball.x<=ball.r){
+		ball.x=ball.r;
+		ball.vx=-ball.vx*0.9
+	}
+	//console.log("vy:"+ball.vy+" y:"+ball.y)
+}
+function render(ctx){
+	ctx.clearRect(0,0,ctx.canvas.width,ctx.canvas.height)
+	ctx.fillStyle=ball.color;
+	ctx.beginPath()
+	ctx.arc(ball.x,ball.y,ball.r,0,2*Math.PI)
+	ctx.fill()
+}
+</script>
+
+
+</body>
+</html>

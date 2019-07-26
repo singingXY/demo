@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>多物体运动</title>
+  <style type="text/css">
+*{margin:0;padding:0;list-style:none;}
+#aUl{overflow: hidden;margin-top: 50px;}
+#aUl li{width: 200px;height: 100px;background:#f70;margin-top: 20px;  fliter:alpha(opacity:30);
+    opacity:0.3;}
+#bUl li{list-style:none;float: left;width:150px;height: 150px;background-color:#f00;margin:30px 20px;
+    fliter:alpha(opacity:30);
+    opacity:0.3;}
+
+#cUl{overflow: hidden;background:#eee;border:solid 1px #ccc;padding:30px;margin:30px auto;width: 205px;}
+#cUl li{border:solid 1px #f90;padding:10px;background:#fff;width: 70px;height: 70px;text-align: center;float:left;margin: 5px;}
+#cUl li span{display: inline-block;height:50px;width: 100%;position: relative;}
+#cUl li i{display: inline-block;background:#f90;width: 20px;height: 20px;margin:0 auto;position: absolute;top:12px;left:34%;}
+#cUl li:hover{color:#f90;}
+  </style>
+  <script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+</head>
+<body>
+<ul id="cUl">
+  <li><span><i></i></span>打广告</li><li><span><i></i></span><p>打广告</p></li>
+  <li><span><i></i></span><p>打广告</p></li><li><span><i></i></span><p>打广告</p></li>
+</ul>
+<ul id="aUl">
+  <li></li><li></li><li></li>
+</ul>
+<ul id="bUl">
+  <li></li><li></li><li></li>
+</ul>
+<script type="text/javascript">
+  window.onload= function() {
+    var cUl = document.getElementById('cUl'),
+    cLi = cUl.getElementsByTagName('li');
+    for (var i = 0; i < cLi.length; i++) {
+      cLi[i].onmouseenter = function(){//onmouseenter事件不支持冒泡
+        var _this = this.getElementsByTagName('i')[0];
+        sMove(_this,{'top':0,'opacity':0},function(){
+          _this.style.top=24+'px';
+          sMove(_this,{'top':12,'opacity':100});
+        });
+      }
+    }
+
+
+    var aUl = document.getElementById('aUl'),
+    aLi = aUl.getElementsByTagName('li');
+    for (var i = 0; i < aLi.length; i++) {
+      aLi[i].timer=null;
+      aLi[i].onmouseover = function(){
+        sMove(this,{'width':400,'height':200,'opacity':100},function(){
+          sMove(this,{'height':400});
+          });
+        /*
+          //链式运动
+          sMove(this,'width',400,function(){
+          sMove(this,'height',200);
+        });
+        */
+      }
+      aLi[i].onmouseout = function(){
+        sMove(this,{'width':200,'height':100,'opacity':30});
+       //sMove(this,'height',100);
+      }
+    }
+
+
+    //obj：对象或this，sx：{属性：值}，fn：链式运动function(){sMove();}
+    function sMove (obj,sx,fn) {
+      var flag = true;
+      clearInterval(obj.timer);
+      obj.timer = setInterval(function(){
+         for(var attr in sx){
+            var icur=0;
+            if (attr=='opacity') {
+               icur =Math.round(parseFloat( getStyle(obj,attr))*100);
+               //符合fliter整数习惯,math.round四舍五入避免出现多位小数
+            } else{
+            icur =parseInt( getStyle(obj,attr));
+            };
+            var sd = (sx[attr]-icur)/8;
+            sd = sd>0?Math.ceil(sd):Math.floor(sd);
+            //检测停止
+            if (icur!=sx[attr]) {
+               flag = false;//如果其中有值未达到目标值则继续执行
+            }else{
+               flag = true;
+            }
+            if (attr=='opacity') {
+               obj.style.fliter="alpha(opacity:"+(icur +sd)+")";
+               obj.style.opacity=(icur +sd)/100;
+            } else{
+               obj.style[attr]= icur +sd+ "px";
+            };
+         }
+         if(flag){
+            clearInterval(obj.timer);
+            if (fn) {
+               fn.call(obj);
+            };//回调,call改变this的指向,指向obj
+         }
+      },30)
+    }
+
+
+
+
+
+
+    //透明度变化
+
+    var bUl = document.getElementById('bUl'),
+    bLi = bUl.getElementsByTagName('li');
+    for (var i = 0; i < bLi.length; i++) {
+      bLi[i].timer=null;
+      bLi[i].alpha =30;
+      bLi[i].onmouseover=function(){
+        opMove(this,100);
+      }
+      bLi[i].onmouseout=function(){
+        opMove(this,30);
+      }
+    };
+
+    function opMove(obj,tmd){
+      clearInterval(obj.timer);
+      obj.timer=setInterval(function(){
+        var sd =0;
+        if (obj.alpha>tmd) {
+          sd=-10;
+        } else{
+          sd=10;
+        };
+          if (obj.alpha==tmd) {
+          clearInterval(obj.timer);
+        } else{
+          obj.alpha+=sd;
+          obj.style.fliter="alpha(opacity:"+obj.alpha+")";
+          obj.style.opacity=obj.alpha/100;//需要得到0.3
+        };
+      },30)
+    }
+  }
+  //获得样式
+function getStyle (obj,attr) {
+  if (obj.currentStyle) {//IE
+    return obj.currentStyle[attr];
+  } else{
+    return getComputedStyle(obj,false)[attr]
+  };
+}
+</script>
+</body>
+</html>

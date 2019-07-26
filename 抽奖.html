@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+<style type="text/css">
+.title{ text-align:center;font-size:24px;font-weight:bold;color:#F00;margin-top:50px;}
+.btns{ text-align:center;margin-top:30px;}
+.btns span{display:inline-block;width:80px;height:27px;line-height:27px;background:#036; margin-right:10px;color:#FFF;text-align:center;font-size:14px;cursor:pointer;}
+</style>
+
+    <div id="title" class="title">开始抽奖啦！</div>
+    <div class="btns">
+       <span id="play">开 始</span>
+       <span id="stop">停 止</span>
+    </div>
+<script type="text/javascript">
+  var jiang=['Phone5','谢谢参与','Ipad','三星笔记本','谢谢参与','佳能相机','惠普打印机','谢谢参与','50元充值卡','200元超市购物券'];
+      timer=null;
+      flag=0;
+
+window.onload= function(){
+    var play = document.getElementById('play'),
+        stop = document.getElementById('stop');
+
+    play.onclick = playFun;
+    stop.onclick = stopFun;
+
+  document.onkeyup = function(event){
+      event = event || window.event;
+      if(event.keyCode==13){
+        if (flag==0) {
+          playFun();
+          flag=1;
+        } else{
+          stopFun();
+          flag=0;
+        };
+      }
+    }
+
+    function playFun() {
+      var title = document.getElementById('title');
+      //setInterval为定时器，每隔50毫秒执行一次
+      //clear防止多次生成定时器
+      clearInterval(timer);
+      timer = setInterval(function(){
+        //取整（生成0-1之间的随机浮点数*数组长度）
+        var suiji =Math.floor( Math.random()*jiang.length );
+        title.innerHTML= jiang[suiji];
+      },50);
+      play.style.background='#ccc';
+    }
+
+    function stopFun(){
+      clearInterval(timer);
+      play.style.background='#036';
+    }
+  }
+
+</script>
+</body>
+</html>

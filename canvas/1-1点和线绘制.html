@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="canvas1" width="800" height="600">当前浏览器不支持</canvas>
+<script>
+	function canvas1() {
+		var canvas1 = document.getElementById('canvas1');
+
+		var context = canvas1.getContext('2d');
+
+		//使用context绘制
+		context.moveTo(100,100)
+		context.lineTo(500,500)
+		context.lineTo(100,500)
+		context.lineTo(100,100)
+
+		//stroke绘制线条
+		context.lineWidth=5
+		context.strokeStyle ="#058"
+		context.stroke()
+		
+		//fill绘制色块
+		context.fillStyle="rgb(2,100,30)"
+		context.fill()
+
+		context.beginPath() //重新开始一段路径
+		context.moveTo(200,100)
+		context.lineTo(600,500)
+		context.strokeStyle ="red"
+		context.stroke()
+		context.closePath() //闭合当前路径使得所有线段连接
+	}
+	canvas1();
+</script>
+
+
+<canvas id="canvas2" width="800" height="600">当前浏览器不支持</canvas>
+<script>
+var tangram =[
+ 	{p:[{x:0,y:0},{x:400,y:0},{x:200,y:200}],color:"#cf6"},
+ 	{p:[{x:0,y:0},{x:200,y:200},{x:0,y:400}],color:"#6bc"},
+            {p:[{x:400,y:0},{x:400,y:200},{x:300,y:300},{x:300,y:100}],color:"#ef3d61"},
+            {p:[{x:300,y:100},{x:300,y:300},{x:200,y:200}],color:"#f9f51a"},
+            {p:[{x:200,y:200},{x:300,y:300},{x:200,y:400},{x:100,y:300}],color:"#a594c0"},
+            {p:[{x:100,y:300},{x:200,y:400},{x:0,y:400}],color:"#fa8ecc"},
+            {p:[{x:400,y:200},{x:400,y:400},{x:200,y:400}],color:"#f6ca29"}
+ ];
+window.onload = function(){
+	var canvas2 = document.getElementById('canvas2');
+	var context2 = canvas2.getContext('2d');
+	for (var i = 0; i < tangram.length; i++) {
+		draw(tangram[i],context2);
+	}
+}
+function draw(piece,cxt){
+	cxt.beginPath();
+	cxt.moveTo(piece.p[0].x,piece.p[0].y);
+	for (var i = 0; i < piece.p.length; i++) 
+		cxt.lineTo(piece.p[i].x,piece.p[i].y);
+	cxt.closePath();
+	cxt.fillStyle=piece.color;
+	cxt.fill();
+
+    cxt.strokeStyle = "black";
+    cxt.lineWidth = 3;
+    cxt.stroke();
+}
+
+</script> 
+</body>
+</html>

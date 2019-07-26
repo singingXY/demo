@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="canvas">当前浏览器不支持</canvas>
+<script>
+	function canvas() {
+		var canvas = document.getElementById('canvas');
+		canvas.width =800;
+		canvas.height = 800;
+
+		var context = canvas.getContext('2d');
+												//3内圆半径，6外圆半径
+		var radialGrad =context.createRadialGradient(400,400,0,400,400,500);
+		radialGrad.addColorStop(0.0,'#fff');
+		radialGrad.addColorStop(0.25,'#ff0');
+		radialGrad.addColorStop(0.5,'green');
+		radialGrad.addColorStop(0.75,'blue');
+		radialGrad.addColorStop(1.0,'#000');
+		context.fillStyle =radialGrad;
+		context.fillRect(0,0,800,800);
+	}
+	canvas();
+
+</script>
+
+
+
+</body>
+</html>

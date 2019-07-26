@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="canvas">当前浏览器不支持</canvas>
+<script>
+	function canvas() {
+		var canvas = document.getElementById('canvas');
+		canvas.width =1200;
+		canvas.height = 800;
+
+		var context = canvas.getContext('2d');
+
+		//context.lineJoin ='bevel'//斜接
+		//context.lineJoin ='round'//圆角
+		
+		//context.fillStyle="blank";
+		var skyStyle =context.createRadialGradient(
+								canvas.width/2,canvas.height,0,
+								canvas.width/2,canvas.height,canvas.height);
+		skyStyle.addColorStop(0.0,'#035');
+		skyStyle.addColorStop(1.0,'#000');
+		context.fillStyle=skyStyle;
+		context.fillRect(0,0,canvas.width,canvas.height)
+		
+		for (var i = 0; i < 200; i++) {
+			//10到20间的随机数，Math.random()为0到1
+			var r =Math.random() * 5 +5;
+			var x =Math.random() * canvas.width;
+			var y =Math.random() * canvas.height * 0.65;
+			var a =Math.random() *360;
+			drawStar(context,x,y,r,a);
+		}
+	}
+	canvas();
+
+	function drawStar(cxt,x,y,R,rot) {
+		//通过图形变换变为需求样式
+		cxt.save();
+
+		cxt.translate(x,y);
+		cxt.rotate(rot/180*Math.PI)
+		cxt.scale(R,R);
+		//缩放会使图形所有属性跟着变化
+
+		starPath(cxt);//绘制基本形状
+		
+		cxt.fillStyle = "#fb3";
+		//cxt.strokeStyle = "#fb5";
+		//cxt.lineWidth=3;
+		//cxt.lineJoin="round";
+
+		cxt.fill();
+		//cxt.stroke();
+
+		cxt.restore();
+		
+	}
+
+	function starPath(cxt){
+
+		cxt.beginPath();
+		for (var i = 0; i < 5; i++) {
+			                  //每次加72度  //cos为角度，JS里除180转为弧度
+			                  //300为半径 //400位移置于画布中间
+			cxt.lineTo(Math.cos( (18+i*72)/180*Math.PI ),
+							-Math.sin( (18+i*72)/180*Math.PI ));
+			cxt.lineTo(Math.cos( (54+i*72)/180*Math.PI )*0.5,
+							-Math.sin( (54+i*72)/180*Math.PI )*0.5);
+		}
+		cxt.closePath();
+	}
+</script>
+
+
+
+</body>
+</html>
