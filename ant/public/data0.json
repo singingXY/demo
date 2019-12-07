@@ -1,0 +1,79 @@
+{
+  "code": 2000,
+  "result": true,
+  "desc": "成功",
+  "data": [
+    {
+      "code": "ID",
+      "isNull": 2,
+      "name": "设备唯一标识",
+      "index": 1,
+      "isExtended": 1026,
+      "type": 1
+    },
+    {
+      "code": "CODE",
+      "isNull": 2,
+      "name": "本地编码",
+      "index": 2,
+      "isExtended": 1026,
+      "type": 1
+    },
+    {
+      "code": "NAME",
+      "isNull": 2,
+      "name": "设备名称",
+      "index": 3,
+      "isExtended": 1026,
+      "type": 1
+    },
+    {
+      "code": "FACILITY_ID",
+      "data": { "specId": "", "name": "", "id": "" },
+      "sourceSpecId": 1010100001,
+      "isNull": 2,
+      "name": "所属机房",
+      "index": 100,
+      "isExtended": 1026,
+      "type": 3,
+      "value": ""
+    },
+    {
+      "code": "LIFE_STATE_ID",
+      "data": [
+        { "name": "投用", "id": 100374 },
+        { "name": "设计", "id": 100373 },
+        { "name": "交维", "id": 100372 },
+        { "name": "上电", "id": 100370 },
+        { "name": "施工", "id": 102384 },
+        { "name": "报废", "id": 102383 }
+      ],
+      "isNull": 2,
+      "name": "生命周期状态",
+      "index": 100,
+      "isExtended": 1026,
+      "type": 2
+    },
+    {
+      "code": "LOCK_STATE_ID",
+      "data": [
+        { "name": "割接封锁", "id": 100134 },
+        { "name": "无封锁", "id": 100138 },
+        { "name": "其他封锁", "id": 101847 }
+      ],
+      "isNull": 2,
+      "name": "封锁状态",
+      "index": 100,
+      "isExtended": 1026,
+      "type": 2
+    },
+    {
+      "code": "TELNET_IP",
+      "isNull": 2,
+      "name": "设备IP",
+      "index": 100,
+      "isExtended": 1026,
+      "type": 1
+    }
+  ]
+}
