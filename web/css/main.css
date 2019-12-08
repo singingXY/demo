@@ -65,7 +65,7 @@ a {
 }
 
 .nav {
-  /* height: 40px; */
+  height: 40px;
 }
 .nav_left,
 .nav_mid,
@@ -121,4 +121,8 @@ a {
   background: #fff url(../images/search.jpg) no-repeat right
     center;
   border: 1px solid #fff;
+}
+.ad {
+  height: 310px;
+  overflow: hidden;
 }
