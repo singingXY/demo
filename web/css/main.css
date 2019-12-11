@@ -317,6 +317,11 @@ li {
   background: url(../images/type_bg.png) repeat-x;
   padding-left: 20px;
 }
+.list_box h1 {
+  font-size: 20px;
+  text-align: center;
+  margin: 10px 0;
+}
 .page {
   height: 40px;
   margin-top: 10px;
@@ -336,4 +341,23 @@ li {
 .page a:active {
   color: #fff;
   background: #cc1b1b;
+}
+
+.list_box_newsInfo {
+  color: #666;
+  text-align: center;
+  border-bottom: 1px dotted #666;
+}
+.list_box_newsContent {
+  font-size: 14px;
+  padding: 20px;
+  line-height: 25px;
+  text-indent: 2em;
+}
+.list_box_newsContent img {
+  display: block;
+  margin: 0 auto;
+}
+.list_box_newsContent p {
+  margin-bottom: 20px;
 }
