@@ -30,12 +30,10 @@
     <a-directory-tree
       showLine
       showIcon
-      :treeData="treeData"
       defaultExpandAll
+      :treeData="treeData"
       :replaceFields="replaceFields"
     >
-      <a-icon slot="smile" type="smile-o" />
-      <a-icon slot="meh" type="smile-o" />
     </a-directory-tree>
     <a-tree
       showLine
@@ -44,6 +42,7 @@
       :treeData="treeData"
       defaultExpandAll
       :replaceFields="replaceFields"
+      @select="onSelect"
     >
       <a-icon slot="smile" type="smile-o" />
       <a-icon slot="meh" type="meh-o" />
@@ -112,8 +111,12 @@ export default {
     };
   },
   methods: {
-    onSelect(selectedKeys, info) {
-      console.log("selected", selectedKeys, info);
+    onSelect(key, e) {
+      console.log(e);
+      e.node.onExpand();
+    },
+    onExpand(e) {
+      e.expanded = !e.expanded;
     }
   }
 };
